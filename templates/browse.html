@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}{{ title }}{% endblock %}
+{% block content %}
+<div class="row-fluid monospaced">
+	<table class="table table-striped table-hover">
+	<thead>
+		<tr>
+			<th>File name</th>
+		</tr>
+	</thead>
+	<tbody>
+{% for file in files %}
+		<tr>
+		<td>
+			<a href="/{{ file.filepath }}">{{ file.filename }}</a>
+		</td>
+		</tr>
+{% endfor %}
+	</tbody>
+	</table>
+	<form class="form" method="post">
+		<fieldset>
+			<label for="filename">New file</label>
+			<input
+				class="input-xlarge"
+				type="text"
+				name="filename"
+				id="filename"
+				placeholder="directory/subdirectory/filename.md"
+				{% if filename %}value="{{ filename }}"{% endif %}
+				>
+			<br><input type="submit" value="Create new file" class="btn btn-primary">
+		</fieldset>
+	</form>
+</div>	
+{% endblock %}

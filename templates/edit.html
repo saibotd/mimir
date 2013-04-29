@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}{{ title }}{% endblock %}
+{% block content %}
+<div class="row-fluid monospaced">
+	<form class="form" method="post">
+		<fieldset>
+			<textarea
+				class="input-block-level"
+				name="text"
+				rows="12">{{ text }}</textarea>
+			<input type="submit" class="btn btn-primary" value="Save file">
+		</fieldset>
+	</form>
+</div>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="/static/js/jquery.textarea.min.js"></script>
+<script>
+	$("textarea").tabby();
+</script>
+{% endblock %}

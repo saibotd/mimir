@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>	
+{% block head %}
+	<title>Mímir - {% block title %}{% endblock %}</title>
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" />
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap-responsive.min.css') }}" />
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/layout.css') }}" />
+	
+	<!--[if lt IE 9]>
+	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->		
+{% endblock %}
+</head>
+<body>
+
+<div class="header monospaced">
+<div class="container-fluid">
+  <div class="pull-right">
+    <a class="btn btn-link" href="/"><i class="icon-home"></i> Home</a>
+  </div> 
+  <h4 class="">{{ title }}</h4>
+</div>
+</div>
+
+<div class="container-fluid">
+  <hr>
+  {% if error %}<div class="alert monospaced">{{ error }}</div>{% endif %}
+	{% block content %}{% endblock %}
+  <hr>
+</div>
+
+{% if menu %}
+<div class="container-fluid monospaced">
+  <div class="pull-right">
+      {% for href,title in menu.iteritems() %}
+      <a class="btn" href="{{ href }}">{{ title }}</a>
+      {% endfor %}
+  </div>
+  <h4 class="muted">{{ title }}</h4>
+</div>
+{% endif %}
+</body>
+</html>
