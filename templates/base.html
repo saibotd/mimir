@@ -10,6 +10,7 @@
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" />
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap-responsive.min.css') }}" />
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/layout.css') }}" />
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/print.css') }}" media="print" />
 	
 	<!--[if lt IE 9]>
 	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -28,20 +29,22 @@
 </div>
 
 <div class="container-fluid">
-  <hr>
+  <hr class="noprint">
   {% if error %}<div class="alert monospaced">{{ error }}</div>{% endif %}
 	{% block content %}{% endblock %}
-  <hr>
+  <hr class="noprint">
 </div>
 
 {% if menu %}
-<div class="container-fluid monospaced">
-  <div class="pull-right">
-      {% for href,title in menu.iteritems() %}
-      <a class="btn" href="{{ href }}">{{ title }}</a>
-      {% endfor %}
+<div class="monospaced footer">
+  <div class="container-fluid">
+    <div class="pull-right">
+        {% for href,title in menu.iteritems() %}
+        <a class="btn" href="{{ href }}">{{ title }}</a>
+        {% endfor %}
+    </div>
+    <h4 class="muted">{{ title }}</h4>
   </div>
-  <h4 class="muted">{{ title }}</h4>
 </div>
 {% endif %}
 </body>
