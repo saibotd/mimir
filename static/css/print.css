@@ -1,0 +1,23 @@
+.header,
+.footer,
+.noprint{
+  display: none;
+}
+
+hr{
+	border-top-color: #000;
+	border-bottom: none;
+}
+
+body{
+	background-image: none;
+	color: #000;
+}
+
+.textual{
+	max-width: none;
+}
+
+h1, h2, h3{
+	page-break-before: auto;
+}
