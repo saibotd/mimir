@@ -49,6 +49,15 @@ def openFile(filename):
 	f = open(filepath, "r")
 	return f
 
+def compileBreadcrumbs(title):
+	title = title.split("/")
+	href = ""
+	breadcrumbs = []
+	for part in title:
+		href += "/" + part
+		breadcrumbs.append({ "href" : href, "part" : part })
+	return breadcrumbs
+
 app = Flask(__name__)
 
 @app.route("/", methods=['GET', 'POST'])
@@ -95,17 +104,17 @@ def appBrowse(filename = ""):
 			} )
 	title = filename
 	if not title:
-		title = "Home"
+		title = ""
 	if request.method == 'GET':
-		return render_template("browse.html", title=title, files=files)
+		return render_template("browse.html", title=title, breadcrumbs=compileBreadcrumbs(title), files=files)
 	if request.method == 'POST':
 		if not request.form['filename']:
-			return render_template("browse.html", title=title, files=files, error="Please enter a filename")
+			return render_template("browse.html", title=title, breadcrumbs=compileBreadcrumbs(title), files=files, error="Please enter a filename")
 		filepath = os.path.abspath(os.path.join(filepath, request.form['filename']))
 		if not filepath.startswith(home_dir):
-			return render_template("browse.html", title=title, files=files, error="File outside of directory")
+			return render_template("browse.html", title=title, breadcrumbs=compileBreadcrumbs(title), files=files, error="File outside of directory")
 		if os.path.exists(filepath):
-			return render_template("browse.html", title=title, files=files, error="File already exists")
+			return render_template("browse.html", title=title, breadcrumbs=compileBreadcrumbs(title), files=files, error="File already exists")
 		dirs, _filename = os.path.split(filepath)
 		if dirs and not os.path.exists(dirs):
 			print "Creating directories %s " % (dirs)
@@ -128,6 +137,7 @@ def appShow(filename = ""):
 			return render_template("show.html",
 				content=content,
 				title=filename,
+				breadcrumbs=compileBreadcrumbs(filename),
 				menu={
 					"/get/"+quote(filename.encode('utf-8')) : "Raw",
 					"/edit/"+quote(filename.encode('utf-8')) : "Edit"
@@ -146,6 +156,7 @@ def appShowHTML(filename = ""):
 		return render_template("show_html.html",
 			content=content,
 			title=filename,
+			breadcrumbs=compileBreadcrumbs(filename),
 			menu={
 				"/get/"+quote(filename.encode('utf-8')) : "Raw",
 				"/edit/"+quote(filename.encode('utf-8')) : "Edit"
@@ -161,6 +172,7 @@ def appShowMarkdown(filename = ""):
 		return render_template("show_html.html",
 			content=content,
 			title=filename,
+			breadcrumbs=compileBreadcrumbs(filename),
 			menu={
 				"/get/"+filename : "Raw",
 				"/edit/"+filename : "Edit"
@@ -188,6 +200,7 @@ def appShowTasks(filename = ""):
 		return render_template("tasklist.html",
 			tasks=tasks,
 			title=filename,
+			breadcrumbs=compileBreadcrumbs(filename),
 			menu={
 				"/get/"+quote(filename.encode('utf-8')) : "Raw",
 				"/edit/"+quote(filename.encode('utf-8')) : "Edit"
@@ -199,6 +212,7 @@ def appShowTasks(filename = ""):
 				error="Please enter new tasks",
 				tasks=tasks,
 				title=filename,
+				breadcrumbs=compileBreadcrumbs(filename),
 				menu={
 					"/get/"+quote(filename.encode('utf-8')) : "Raw",
 					"/edit/"+quote(filename.encode('utf-8')) : "Edit"
@@ -239,7 +253,11 @@ def appEdit(filename):
 	if not f:
 		abort(404)
 	if request.method == 'GET':
-		return render_template("edit.html", text=f.read().decode('utf-8'), title=filename, filename=quote(filename.encode('utf-8')))
+		return render_template("edit.html",
+			text=f.read().decode('utf-8'),
+			title=filename,
+			breadcrumbs=compileBreadcrumbs(filename),
+			filename=quote(filename.encode('utf-8')))
 	if request.method == 'POST':
 		text = request.form['text']
 		with open(os.path.join(home_dir, filename), "w") as f:

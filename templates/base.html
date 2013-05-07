@@ -21,10 +21,9 @@
 
 <div class="header monospaced">
 <div class="container-fluid">
-  <div class="pull-right">
-    <a class="btn btn-link" href="/"><i class="icon-home"></i> Home</a>
-  </div> 
-  <h4 class="">{{ title }}</h4>
+  <h4 class="breadcrumbs">
+    <a href="/">Home</a>{% for item in breadcrumbs %}/<a href="{{ item.href }}">{{ item.part }}</a>{% endfor %}
+  </h4>
 </div>
 </div>
 
