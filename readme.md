@@ -13,13 +13,13 @@ Mímir is a flat-file note-taking and task managing application.
 
 ## Screenshots
 
-[Browse](http://saibotd.com/mimir/browser.png)
+![Browse](http://saibotd.com/mimir/browser.png)
 
-[Tasks](http://saibotd.com/mimir/tasks.png)
+![Tasks](http://saibotd.com/mimir/tasks.png)
 
-[Editor](http://saibotd.com/mimir/edit.png)
+![Editor](http://saibotd.com/mimir/edit.png)
 
-[HTML](http://saibotd.com/mimir/html.png)
+![HTML](http://saibotd.com/mimir/html.png)
 
 ## Usage
 
