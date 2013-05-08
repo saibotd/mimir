@@ -10,7 +10,17 @@ Mímir is a flat-file note-taking and task managing application.
 1. `pip install flask markdown`
 2. [Download Mímir](https://github.com/saibotd/mimir/archive/master.zip)
 3. Put Mímir into a directory (e.g. ~/mimir)
-	
+
+## Screenshots
+
+[Browse](http://saibotd.com/mimir/browser.png)
+
+[Tasks](http://saibotd.com/mimir/tasks.png)
+
+[Editor](http://saibotd.com/mimir/edit.png)
+
+[HTML](http://saibotd.com/mimir/html.png)
+
 ## Usage
 
 Setup a directory where you would like to store your notes.
@@ -25,6 +35,6 @@ Inside of Mímir you may now start to create or edit your files. The following f
 - Plain text files
 - Markdown (.md)
 - HTML (.html)
-- Tasklist (.task)
-- All other files will be forwarded to your browser (e.g. images, PDF) so you may use these as well in your documents
+- Tasklist (.task, losely based on Todo.txt)
+- All other files will be forwarded to your browser (e.g. images, PDF) so you may use these in your documents as links or image tags.
 
