@@ -2,24 +2,24 @@
 {% block title %}{{ title }}{% endblock %}
 {% block content %}
 <style type="text/css">
-	#editor{
-		position: absolute;
-		left: 0;
-		top: 0;
-		bottom: 0;
-		right: 0;
-	}
+#editor{
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+}
 </style>
 
-	<div
-		id="editor"
-		class="{% if error %}input-error{% endif %}">{{ text }}</div>
+<div
+id="editor"
+class="{% if error %}input-error{% endif %}">{{ text }}</div>
 
 <script src="http://d1n0x3qji82z53.cloudfront.net/src-min-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
 <script>
-    var editor = ace.edit("editor");
-    editor.setTheme("ace/theme/monokai");
-    editor.getSession().setMode("ace/mode/php");
+var editor = ace.edit("editor");
+editor.setTheme("ace/theme/monokai");
+editor.getSession().setMode("ace/mode/php");
 </script>
 
 {% endblock %}

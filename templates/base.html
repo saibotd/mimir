@@ -1,50 +1,39 @@
 <!DOCTYPE html>
 <html>
 <head>	
-{% block head %}
-	<title>Mímir - {% block title %}{% endblock %}</title>
+  {% block head %}
+  <title>Mímir - {% block title %}{% endblock %}</title>
 
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	
-	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" />
-	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap-responsive.min.css') }}" />
-	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/layout.css') }}" />
-	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/print.css') }}" media="print" />
-	
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/pure-min.css') }}" />
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/layout.css') }}" />
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/print.css') }}" media="print" />
+  
 	<!--[if lt IE 9]>
 	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->		
-{% endblock %}
+  {% endblock %}
 </head>
 <body>
+  <div class="content">
+    <h4 class="breadcrumbs">
+      <a href="/">Home</a>{% for item in breadcrumbs %} / <a href="{{ item.href }}">{{ item.part }}</a>{% endfor %}
+    </h4>
 
-<div class="header monospaced">
-<div class="container-fluid">
-  <h4 class="breadcrumbs">
-    <a href="/">Home</a>{% for item in breadcrumbs %}/<a href="{{ item.href }}">{{ item.part }}</a>{% endfor %}
-  </h4>
-</div>
-</div>
 
-<div class="container-fluid">
-  <hr class="noprint">
-  {% if error %}<div class="alert monospaced">{{ error }}</div>{% endif %}
-	{% block content %}{% endblock %}
-  <hr class="noprint">
-</div>
+    {% if error %}<div class="alert monospaced">{{ error }}</div>{% endif %}
+    {% block content %}{% endblock %}
 
-{% if menu %}
-<div class="monospaced footer">
-  <div class="container-fluid">
-    <div class="pull-right">
-        {% for href,title in menu.iteritems() %}
-        <a class="btn" href="{{ href }}">{{ title }}</a>
-        {% endfor %}
-    </div>
-    <h4 class="muted">{{ title }}</h4>
+
+    {% if menu %}
+    <p class="pull-right">
+      {% for href,title in menu.iteritems() %}
+      <a class="pure-button" href="{{ href }}">{{ title }}</a>
+      {% endfor %}
+    </p>
+    {% endif %}
   </div>
-</div>
-{% endif %}
 </body>
 </html>

@@ -1,17 +1,35 @@
-@import url(http://fonts.googleapis.com/css?family=Droid+Sans);
-@import url(http://fonts.googleapis.com/css?family=Droid+Sans+Mono);
-@import url(http://fonts.googleapis.com/css?family=Noto+Serif);
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,300);
+@import url(http://fonts.googleapis.com/css?family=Mono);
 
-.monospaced, .monospaced *{
+html,body{
+	margin: 0;
+	color: #333;
+}
+
+img{
+	max-width: 100%;
+}
+
+.content{
+	margin: 15px;
+}
+
+table{
+	width: 100%;
+}
+
+textarea{
+	font-size: 12pt!important;
+	color: #333;
+}
+
+.monospaced, .monospaced *, textarea{
 	font-family: "Droid Sans Mono", "Consolas", "Monaco", monospace!important;
 }
 
 .header{
-	padding: 10px 0;
-	background-color: #DDD;
-	background-color: rgba(0,0,0,.18);
-	background: -moz-linear-gradient(top, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0) 100%);
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0.25)), color-stop(100%,rgba(0,0,0,0)));
+	padding: 10px;
+	
 }
 
 .btn-task-check i{
@@ -22,6 +40,10 @@
 	opacity: 1;
 }
 
+a{
+	color: rgb(0, 120, 231);
+}
+
 @media (max-width: 767px){
 	.header{
 		margin: 0 -20px;
@@ -30,13 +52,16 @@
 }
 
 body{
-	font-family: 'Droid Sans', "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-family: 'Roboto', "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-weight: 300;
 	background: url("/static/img/body-bg.png");
 }
 
 .textual{
+	font-size: 120%;
 	max-width: 640px;
 	margin: 0 auto;
+	line-height: 160%;
 }
 
 .textual h1,
@@ -46,9 +71,43 @@ body{
 .textual h5,
 .textual h6{
 	margin-top: .75em;
-	font-family: 'Noto Serif', serif;
+	font-weight: 400;
 }
+
+.textual ul{
+	list-style-type:square;
+}
+
+
+
+.pure-button-primary,
+.pure-button{
+	font-weight: 400;
+}
+
 
 .breadcrumbs a{
 	color: rgb(51, 51, 51);
+}
+
+.footer{
+	padding: 10px;
+}
+
+.pull-right{
+	float: right;
+}
+
+::-webkit-scrollbar {
+	width: 12px;
+}
+
+
+::-webkit-scrollbar-track-piece {
+	background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+	background-color: #666;
+	border: 1px solid #FFF;
 }

@@ -1,22 +1,24 @@
 {% extends "base.html" %}
 {% block title %}{{ title }}{% endblock %}
 {% block content %}
-<div class="row-fluid monospaced">
-	<form class="form" method="post">
-		<fieldset>
+<div class="pure-g">
+	<div class="pure-u-1">
+		<form class="pure-form" method="post">
 			<textarea
-				class="input-block-level"
-				name="text"
-				rows="12">{{ text }}</textarea>
-			<input type="submit" class="btn btn-primary" value="Save file">
-		</fieldset>
-	</form>
+			class="pure-input-1"
+			name="text"
+			rows="12">{{ text }}</textarea>
+			<p>
+				<input type="submit" class="pure-button pure-button-primary" value="Save file">
+			</p>
+		</form>
+	</div>
 </div>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script src="/static/js/jquery.autosize-min.js"></script>
 <script src="/static/js/jquery.textarea.min.js"></script>
 <script>
-	$("textarea").tabby();
-	$('textarea').autosize();
+$("textarea").tabby();
+$('textarea').autosize();
 </script>
 {% endblock %}

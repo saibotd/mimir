@@ -2,10 +2,12 @@
 {% block title %}{{ filename }}{% endblock %}
 {% block content %}
 
-<div class="row-fluid">
-	<div class="textual">
-	{{ content|safe }}
-	</div>
+<div class="pure-g">
+    <div class="pure-u-1">
+        <div class="textual">
+           {{ content|safe }}
+       </div>
+   </div>
 </div>
 
 {% endblock %}
