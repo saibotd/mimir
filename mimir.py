@@ -3,6 +3,7 @@
 import sys, os, hashlib, webbrowser, mimetypes, threading, ConfigParser
 import markdown
 from flask import (Flask, render_template, request, redirect, abort, Response, send_file)
+from flask.ext.basicauth import BasicAuth
 from urllib import unquote, quote
 
 script_path, script_name = os.path.split(os.path.realpath(__file__))
@@ -13,15 +14,25 @@ index_file = None
 
 config = ConfigParser.SafeConfigParser()
 config.add_section("general")
+config.add_section("security")
 config.add_section("browser")
 config.add_section("httpd")
 config.set("general", "home", "~")
 config.set("general", "show_hidden", "false")
+config.set("security", "username", "admin")
+config.set("security", "password", "")
 config.set("browser", "autostart", "true")
 config.set("browser", "executable", "")
 config.set("httpd", "host", '127.0.0.1')
 config.set("httpd", "port", '5212')
-config.read([script_path + '/mimir.cfg', os.path.expanduser('~/.mimir.cfg'), os.path.expanduser('~/.config/mimir.cfg')])
+config.read([
+    script_path + '/mimir.cfg',
+    os.path.expanduser('~/.mimir.cfg'),
+    os.path.expanduser('~/.config/mimir.cfg'),
+    script_path + '/mimir.conf',
+    os.path.expanduser('~/.mimir.conf'),
+    os.path.expanduser('~/.config/mimir.conf'),
+    ])
 
 home_dir = os.path.expanduser(config.get("general", "home"))
 
@@ -59,7 +70,15 @@ def compileBreadcrumbs(title):
         breadcrumbs.append({"href": href, "part": part})
     return breadcrumbs
 
+
 app = Flask(__name__)
+
+if config.get("security", "password") != "":
+    app.config['BASIC_AUTH_USERNAME'] = config.get("security", "username")
+    app.config['BASIC_AUTH_PASSWORD'] = config.get("security", "password")
+    app.config['BASIC_AUTH_REALM'] = "Mimir is password protected"
+    app.config['BASIC_AUTH_FORCE'] = True
+    BasicAuth(app)
 
 
 @app.route("/", methods=['GET', 'POST'])
