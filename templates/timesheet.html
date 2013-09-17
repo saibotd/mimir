@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block title %}{{ title }}{% endblock %}
+{% block content %}
+
+<div class="pure-g">
+	<div class="pure-u-1">
+		<table class="pure-table">
+			<thead>
+				<tr>
+					<th>
+						Start
+					</th>
+					<th>
+						End
+					</th>
+					<th>
+						Comment
+					</th>
+					<th align="right">Hours</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for entry in log %}
+				<tr>
+					<td>
+{{ entry.start }}
+					</td>
+										<td>
+{{ entry.end }}
+					</td>
+					<td>
+					{{ entry.comment }}
+				</td>
+				<td align="right">
+					{{ "{0:0.2f}".format(entry.diff.seconds/60/60) }}
+				</td>
+			</tr>
+			{% endfor %}
+		</tbody>
+		<tfoot>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td align="right">
+					{{ "{0:0.2f}".format(seconds/60/60) }}
+				</td>
+			</tr>
+		<tfoot>
+	</table>
+</div>
+</div>
+{% if not session['timesheet_in'] %}
+<div class="pure-g">
+<div class="pure-u-1">
+	<p>
+		<a href="/timesheet/in/{{ filename }}" type="submit" class="pure-button pure-button-primary">Clock in</a>
+	</p>
+</div>
+</div>
+{% endif %}
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="/static/js/jquery.autosize-min.js"></script>
+<script>
+$('textarea').autosize();
+</script>
+{% endblock %}
